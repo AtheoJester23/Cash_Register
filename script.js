@@ -1,4 +1,16 @@
 let cashMachine = document.querySelector(".theCid");
+let changeDueDisplay = document.getElementById("change-due");
+
+let changeDue = [
+  ["ONE HUNDRED"],
+  ["TWENTY"],
+  ["TEN"],
+  ["FIVE"],
+  ["ONE"],
+  ["QUARTER"],
+  ["DIME"],
+  ["NICKEL"],
+];
 
 let cid = [
   ["PENNY", 1.01],
@@ -12,33 +24,45 @@ let cid = [
   ["ONE HUNDRED", 100],
 ];
 
+let cash_in_drawer = [100, 20, 10, 5, 1, 0.25, 0.1, 0.05, 0.01];
+
 let displayCID = "";
 
 document.getElementById("purchase-btn").addEventListener("click", () => {
-  const price = document.getElementById("thePrice");
+  let price = document.getElementById("thePrice").value;
   let input = document.getElementById("cash").value;
 
   let result = 0;
 
-  console.log(input);
+  let totalChange = 0;
 
-  console.log(price.value);
+  if (input < price) {
+    alert("Customer does not have enough money to purchase the item");
+    return;
+  } else {
+    totalChange = input - price;
+    console.log(`the total change is: ${totalChange}`);
 
-  // console.log(input.value.replace(/\s/g, "") - 5);
+    console.log(typeof totalChange);
 
-  for (let i = 0; i < cid.length; i++) {
-    // let line = String(cid[i]).replace(/,/g, ": $");
+    for (let i = 0; i < cid.length; i++) {
+      // let line = String(cid[i]).replace(/,/g, ": $");
 
-    // console.log(cid[i][1]);
+      // console.log(cidRev[i][1]);
 
-    while (input >= cid[i][1]) {
-      console.log(i);
-      let compute = (input -= cid[i][1]);
-      result = compute;
+      while (totalChange >= cash_in_drawer[i]) {
+        console.log(`We're at ${cash_in_drawer[i]} right now...`);
+        let compute = (totalChange -= cash_in_drawer[i]);
+        totalChange = compute;
+
+        changeDueDisplay.innerHTML += `<p>${cash_in_drawer[i]}</p>`;
+      }
     }
+
+    console.log(totalChange);
   }
 
-  console.log(result);
+  // console.log(input.value.replace(/\s/g, "") - 5);
 });
 
 for (let i = 0; i < cid.length; i++) {
