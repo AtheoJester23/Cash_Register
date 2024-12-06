@@ -1,15 +1,16 @@
 let cashMachine = document.querySelector(".theCid");
 let changeDueDisplay = document.getElementById("change-due");
 
-let changeDue = [
-  ["ONE HUNDRED"],
-  ["TWENTY"],
-  ["TEN"],
-  ["FIVE"],
-  ["ONE"],
-  ["QUARTER"],
-  ["DIME"],
-  ["NICKEL"],
+const denominations = [
+  { name: "ONE HUNDRED", value: 100 },
+  { name: "TWENTY", value: 20 },
+  { name: "TEN", value: 10 },
+  { name: "FIVE", value: 5 },
+  { name: "ONE", value: 1 },
+  { name: "QUARTER", value: 0.25 },
+  { name: "DIME", value: 0.1 },
+  { name: "NICKEL", value: 0.05 },
+  { name: "PENNY", value: 0.01 },
 ];
 
 let cid = [
@@ -24,51 +25,34 @@ let cid = [
   ["ONE HUNDRED", 100],
 ];
 
+let theRev = cid.reverse();
+
+let cidVariable = [];
+
 let cash_in_drawer = [100, 20, 10, 5, 1, 0.25, 0.1, 0.05, 0.01];
 
-let displayCID = "";
-
-document.getElementById("purchase-btn").addEventListener("click", () => {
-  let price = document.getElementById("thePrice").value;
-  let input = document.getElementById("cash").value;
-
-  let result = 0;
-
-  let totalChange = 0;
-
-  if (input < price) {
-    alert("Customer does not have enough money to purchase the item");
-    return;
-  } else {
-    totalChange = input - price;
-    console.log(`the total change is: ${totalChange}`);
-
-    console.log(typeof totalChange);
-
-    for (let i = 0; i < cid.length; i++) {
-      // let line = String(cid[i]).replace(/,/g, ": $");
-
-      // console.log(cidRev[i][1]);
-
-      while (totalChange >= cash_in_drawer[i]) {
-        console.log(`We're at ${cash_in_drawer[i]} right now...`);
-        let compute = (totalChange -= cash_in_drawer[i]);
-        totalChange = compute;
-
-        changeDueDisplay.innerHTML += `<p>${cash_in_drawer[i]}</p>`;
-      }
-    }
-
-    console.log(totalChange);
-  }
-
-  // console.log(input.value.replace(/\s/g, "") - 5);
-});
-
-for (let i = 0; i < cid.length; i++) {
-  let line = String(cid[i]).replace(/,/g, ": $");
-
-  displayCID += `<p style="color: white;">${line}</p>`;
+for (const cash of cid) {
+  cashMachine.innerHTML += `<p style="color: white">${String(cash).replace(
+    /,/,
+    ": $"
+  )}</p>`;
 }
 
-cashMachine.innerHTML = displayCID;
+function calculateChange() {
+  let thePrice = parseFloat(document.getElementById("thePrice").value);
+  let givenAmount = parseFloat(document.getElementById("cash").value);
+
+  if (givenAmount < thePrice) {
+    alert("Customer does not have enough money to purchase the item");
+    return;
+  } else if (givenAmount === thePrice) {
+    changeDueDisplay.innerHTML =
+      "<p>No change due - customer paid with exact cash</p>";
+  }
+
+  let theChange = givenAmount - thePrice;
+
+  console.log(theChange);
+  for (const item of denominations) {
+  }
+}
