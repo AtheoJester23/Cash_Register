@@ -9,6 +9,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
+    
 }
 
 .puchaseOpt{
@@ -27,17 +28,39 @@ body{
 #purchase-btn{
     border: none;
     padding: 15px;
-    background-color: #481E14;
-    color: #F2613F;
+    background-color: #31511E;
+    color: #F6FCDF;
     border-radius: 10px;
-    transform: translateY(-10px);
+    transform: translateY(-3px);
     transition: transform 0.15s;
 }
 
 #purchase-btn:hover{
     transform: translateY(0px);
+    background-color: #3b6125;
+    color: #1A1A19;
 }
 
 .cashierOpt{
     padding: 10px;
+}
+
+#change-due{
+    height: 100px;
+    overflow-y: auto;
+    background-color: #1A1A19;
+    padding: 10px;
+}
+
+#change-due::-webkit-scrollbar{
+    width: 5px;
+}
+
+#change-due::-webkit-scrollbar-track{
+    background-color: #292928;
+}
+
+#change-due::-webkit-scrollbar-thumb{
+    background-color: #3b6125;
+    border-radius: 15px;
 }
